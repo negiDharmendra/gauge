@@ -15,10 +15,10 @@ jobs:
                 go-version: 1.13
               id: go
 
-            - name: Compile for all platform
-              run: go run build/make.go --all-platforms
+            - name: Compile gauge
+              run: go run build/make.go --all-platforms  --skip-windows
 
-            - name: Create distro for all platform except windows
+            - name: Create distro
               run: |
                 go run build/make.go --distro --all-platforms --skip-windows
 
@@ -26,10 +26,10 @@ jobs:
               uses: actions/upload-artifact@v1
               with:
                  name: gauge-artifact
-              path: deploy
+                 path: ./deploy
 
     windows-package:
-        name: Create package
+        name: Create windows package
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v1
@@ -43,14 +43,14 @@ jobs:
             - name: Compile gauge
               run: go run build/make.go
 
-            - name: Create distro for all platform except windows
+            - name: Create distro
               run: |
-                go run build/make.go --distro --all-platforms --skip-windows
+                go run build/make.go --distro
             - name: Sign
               run: ./build/sign_windows_artifacts.ps1
 
             - name: Upload artifacts
               uses: actions/upload-artifact@v1
               with:
-                 name: gauge-artifact
-              path: deploy
+                 name: gauge-windows-artifact
+                 path: ./deploy
