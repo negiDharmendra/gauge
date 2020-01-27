@@ -42,10 +42,10 @@ jobs:
               id: go
 
             - name: Compile gauge
-                run: go run build/make.go
+              run: go run build/make.go
 
             - name: Create distro for all platform except windows
-                run: |
+              run: |
                 go run build/make.go --distro --all-platforms --skip-windows
             - name: Sign
               run: ./build/sign_windows_artifacts.ps1
