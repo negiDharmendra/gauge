@@ -28,7 +28,6 @@ jobs:
                  name: gauge-artifact
               path: deploy
 
-jobs:
     windows-package:
         name: Create package
         runs-on: windows-latest
