@@ -1,0 +1,57 @@
+name: Deploy
+
+on: [deployment]
+
+jobs:
+    package:
+        name: Create package
+        runs-on: macos-latest
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Set up Go 1.13
+              uses: actions/setup-go@v1
+              with:
+                go-version: 1.13
+              id: go
+
+            - name: Compile for all platform
+              run: go run build/make.go --all-platforms
+
+            - name: Create distro for all platform except windows
+              run: |
+                go run build/make.go --distro --all-platforms --skip-windows
+
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v1
+              with:
+                 name: gauge-artifact
+              path: deploy
+
+jobs:
+    windows-package:
+        name: Create package
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Set up Go 1.13
+                uses: actions/setup-go@v1
+                with:
+                go-version: 1.13
+                id: go
+
+            - name: Compile gauge
+                run: go run build/make.go
+
+            - name: Create distro for all platform except windows
+                run: |
+                go run build/make.go --distro --all-platforms --skip-windows
+            - name: Sign
+              run: ./build/sign_windows_artifacts.ps1
+
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v1
+              with:
+                 name: gauge-artifact
+              path: deploy
