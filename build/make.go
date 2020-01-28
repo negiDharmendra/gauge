@@ -214,6 +214,9 @@ func revParseHead() string {
 func filteredPlatforms() []map[string]string {
 	filteredPlatformEnvs := platformEnvs[:0]
 	for _, x := range platformEnvs {
+		if x[GOOS] == windows && *skipWindowsDistro {
+			continue
+		}
 		if *targetLinux {
 			if x[GOOS] == linux {
 				filteredPlatformEnvs = append(filteredPlatformEnvs, x)
