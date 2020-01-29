@@ -26,8 +26,6 @@ if ("$env:GOBIN" -eq "") {
     $env:GOBIN="$env:GOPATH\bin"
 }
 
-Set-Location -Path "$env:GOPATH\src\github.com\getgauge\gauge"
-
 Push-Location "$pwd\bin\windows_amd64"
 signtool sign /debug /v /tr http://timestamp.digicert.com /a /fd sha256 /td sha256 /f $env:CERT_FILE /as gauge.exe
 if ($LastExitCode -ne 0) {
