@@ -161,10 +161,11 @@ var certFile = flag.String("certFile", "", "Should be passed for signing the win
 // Each target name is the directory name
 var (
 	platformEnvs = []map[string]string{
+		map[string]string{GOARCH: X86, GOOS: darwin, CGO_ENABLED: "0"},
 		map[string]string{GOARCH: X86_64, GOOS: darwin, CGO_ENABLED: "0"},
-		// map[string]string{GOARCH: X86, GOOS: linux, CGO_ENABLED: "0"},
+		map[string]string{GOARCH: X86, GOOS: linux, CGO_ENABLED: "0"},
 		map[string]string{GOARCH: X86_64, GOOS: linux, CGO_ENABLED: "0"},
-		// map[string]string{GOARCH: X86, GOOS: freebsd, CGO_ENABLED: "0"},
+		map[string]string{GOARCH: X86, GOOS: freebsd, CGO_ENABLED: "0"},
 		map[string]string{GOARCH: X86_64, GOOS: freebsd, CGO_ENABLED: "0"},
 		map[string]string{GOARCH: X86, GOOS: windows, CC: "i586-mingw32-gcc", CGO_ENABLED: "1"},
 		map[string]string{GOARCH: X86_64, GOOS: windows, CC: "x86_64-w64-mingw32-gcc", CGO_ENABLED: "1"},
