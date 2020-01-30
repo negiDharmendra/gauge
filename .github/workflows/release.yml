@@ -54,6 +54,10 @@ jobs:
               run: |
                 go run build/make.go --verbose --all-platforms
                 Get-ChildItem -Recurse .\bin
+            - name: Debug
+              run: |
+                go run .\build\make.go --distro --verbose --certFile $Env:CERT_FILE
+                go run .\build\make.go --distro --verbose --certFile $Env:CERT_FILE --bin-dir .\bin\windows_386
 
             - name: Sign
               run: ./build/sign_windows_artifacts.ps1
