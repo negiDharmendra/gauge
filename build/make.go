@@ -119,7 +119,6 @@ func installFiles(files map[string]string, installDir string) {
 		}
 		stat, err := os.Stat(src)
 		if err != nil {
-			fmt.Printf("Error : %s", err.Error())
 			panic(err)
 		}
 		if stat.IsDir() {
@@ -128,7 +127,6 @@ func installFiles(files map[string]string, installDir string) {
 			err = common.MirrorFile(src, filepath.Join(installDst, base))
 		}
 		if err != nil {
-			fmt.Printf("Error : %s", err.Error())
 			panic(err)
 		}
 	}
@@ -178,11 +176,6 @@ var (
 func main() {
 	flag.Parse()
 	commitHash = revParseHead()
-	defer func() {
-		if r := recover(); r != nil {
-			fmt.Println("Recovered ", r)
-		}
-	}()
 	if *nightly {
 		buildMetadata = fmt.Sprintf("nightly-%s", time.Now().Format(nightlyDatelayout))
 	}
