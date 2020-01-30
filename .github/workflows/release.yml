@@ -51,7 +51,9 @@ jobs:
                 echo "::set-env name=CERT_FILE::$Env:GITHUB_WORKSPACE/cert.p12"
 
             - name: Compile gauge
-              run: go run build/make.go --all-platforms
+              run: |
+                go run build/make.go --verbose --all-platforms
+                Get-ChildItem -Recurse .\bin
 
             - name: Sign
               run: ./build/sign_windows_artifacts.ps1

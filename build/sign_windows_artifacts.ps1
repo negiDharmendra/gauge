@@ -34,14 +34,5 @@ if ($LastExitCode -ne 0) {
 Pop-Location
 
 $nightlyFlag = If ($nightly) {"--nightly"} Else {""}
-& go run build/make.go --distro --verbose --bin-dir bin\windows_amd64 $nightlyFlag
-& go run build/make.go --distro --verbose --bin-dir bin\windows_386 $nightlyFlag
-
-Get-ChildItem "$pwd\deploy" |
-ForEach-Object {
-    $fileName  = "$pwd\deploy\$_"
-    signtool sign /debug /v /tr http://timestamp.digicert.com /a /fd sha256 /td sha256 /f $env:CERT_FILE /as $fileName
-    if ($LastExitCode -ne 0) {
-         throw "$fileName signing failed"
-    }
-}
+& go run build/make.go --distro --verbose --certFile $env:CERT_FILE --bin-dir bin\windows_amd64 $nightlyFlag
+& go run build/make.go --distro --verbose --certFile $env:CERT_FILE --bin-dir bin\windows_386 $nightlyFlag
