@@ -280,6 +280,7 @@ func createWindowsInstaller() {
 		panic(err)
 	}
 	copyGaugeBinaries(distroDir)
+	log.Printf("runProcess(\"makensis.exe\", fmt.Sprintf(\"/DPRODUCT_VERSION=%s\", getBuildVersion()), fmt.Sprintf(\"/DGAUGE_DISTRIBUTABLES_DIR=%s\", distroDir),fmt.Sprintf(\"/DOUTPUT_FILE_NAME=%s.exe\", installerFileName),filepath.Join(\"build\", \"install\", \"windows\", \"gauge-install.nsi\"))", getBuildVersion(), distroDir, installerFileName)
 	runProcess("makensis.exe",
 		fmt.Sprintf("/DPRODUCT_VERSION=%s", getBuildVersion()),
 		fmt.Sprintf("/DGAUGE_DISTRIBUTABLES_DIR=%s", distroDir),
