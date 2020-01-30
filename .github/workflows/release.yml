@@ -56,6 +56,9 @@ jobs:
                 Get-ChildItem -Recurse .\bin
             - name: Debug
               run: |
+                go run .\build\make.go --distro --verbose --certFile $Env:CERT_FILE --bin-dir .\bin\windows_amd64
+                go run .\build\make.go --distro --verbose --certFile $Env:CERT_FILE --bin-dir .\bin\windows_386
+                echo "======================signtool========================"
                 signtool sign /debug /v /tr http://timestamp.digicert.com /a /fd sha256 /td sha256 /f $env:CERT_FILE /as .\bin\windows_amd64\gauge.exe
                 signtool sign /debug /v /tr http://timestamp.digicert.com /a /fd sha256 /td sha256 /f $env:CERT_FILE /as .\bin\windows_386\gauge.exe
                 go run .\build\make.go --distro --verbose --certFile $Env:CERT_FILE --bin-dir .\bin\windows_amd64
