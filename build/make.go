@@ -119,7 +119,8 @@ func installFiles(files map[string]string, installDir string) {
 		}
 		stat, err := os.Stat(src)
 		if err != nil {
-			panic(err)
+			fmt.Printf("Error : %s", err.Error())
+			// panic(err)
 		}
 		if stat.IsDir() {
 			_, err = common.MirrorDir(src, installDst)
@@ -127,7 +128,8 @@ func installFiles(files map[string]string, installDir string) {
 			err = common.MirrorFile(src, filepath.Join(installDst, base))
 		}
 		if err != nil {
-			panic(err)
+			fmt.Printf("Error : %s", err.Error())
+			// panic(err)
 		}
 	}
 }
