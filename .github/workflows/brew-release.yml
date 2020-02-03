@@ -10,9 +10,9 @@ jobs:
       - name: Set gauge version
         run: |
           gauge_version=`echo $GITHUB_REF | sed 's/[a-z\/]*//g'`
-          echo "::set-env:: name=GAUGE_VERSION::$gauge_version"
-          echo "::set-env:: name=GAUGE_BRANCH::gauge-$gauge_version"
-          echo "::set-env:: name=GAUGE_URL::https://github.com/getgauge/gauge/archive/v$gauge_version.tar.gz"
+          echo "::set-env name=GAUGE_VERSION::$gauge_version"
+          echo "::set-env name=GAUGE_BRANCH::gauge-$gauge_version"
+          echo "::set-env name=GAUGE_URL::https://github.com/getgauge/gauge/archive/v$gauge_version.tar.gz"
 
 
       - name: Prepare shasum
