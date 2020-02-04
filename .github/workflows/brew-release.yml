@@ -32,5 +32,5 @@ jobs:
           brew update
           (brew uninstall gauge || true) && (brew install gauge || brew link --overwrite gauge)
           cat Formula/gauge.rb
-          brew bump-formula-pr --force --dry-run --write --url=$GAUGE_URL --sha256=$GAUGE_SHASUM --message=\"Created by a bot. Please cc getgauge/core on issues\"  gauge
+          brew bump-formula-pr --force --dry-run --write --url=$GAUGE_URL --sha256=$GAUGE_SHASUM --message="Created by a bot. Please cc getgauge/core on issues"  gauge
           cat Formula/gauge.rb
