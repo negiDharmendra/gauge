@@ -57,8 +57,10 @@ jobs:
           cd deploy
           for artifact in `ls gauge-*.deb`; do
             fpm -t rpm -s deb $artifact
-            output_package=`echo $artifact | sed  's/.deb/.rpm/'`
-            mv -T gauge-*.rpm $output_package
+          done
+          for artifact in `ls gauge-*.rpm`; do
+            output_package=`echo "$artifact" | sed 's/-[0-9].x/-all.x/' | sed 's/-[0-9].i/-all.i/'`
+            mv -T $artifact $output_package
           done
           ls
           sh ../build/publish_rpm_to_bintray.sh
