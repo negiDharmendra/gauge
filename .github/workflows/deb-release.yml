@@ -58,7 +58,7 @@ jobs:
           for artifact in `ls gauge-*.deb`; do
             fpm -t rpm -s deb $artifact
             output_package=`echo $artifact | sed  's/.deb/.rpm/'`
-            mv gauge-*.rpm output_package
+            mv gauge-*.rpm $output_package
           done
           ls
           sh ../build/publish_rpm_to_bintray.sh
