@@ -45,7 +45,7 @@ jobs:
 
       - name: Deploy rpm
         env:
-          REPO: gauge-deb
+          REPO: gauge-rpm
           PACKAGE: gauge
           BINTRAY_PACKAGE: gauge
           DISTRIBUTIONS: nightly
